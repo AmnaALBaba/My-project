@@ -1,5 +1,4 @@
-using Unity.Burst.Intrinsics;
-using Unity.Mathematics;
+
 using UnityEngine;
 
 public class kinetic : MonoBehaviour
@@ -12,26 +11,26 @@ public class kinetic : MonoBehaviour
     public Transform target;
     public float minAngle;
     public float maxAngle;
-    public float current;
+    public float current=0;
 
     void Start()
     {
-        minAngle = -10;
-        maxAngle = 10;
+        minAngle = -45;
+        maxAngle = 45;
 
 
     }
     void Update()
     {
 
-        Circle(circle);
-        Arim(arm, target);
+        RotateCircle(circle);
+        RotateArim(arm, target);
 
     }
 
 
 
-    void Circle(Transform[] circle)
+    void RotateCircle(Transform[] circle)
     {
         circle[0].Rotate(0f, 0f, speed * Time.deltaTime);
         circle[1].Rotate(speed * Time.deltaTime, 0f, 0f);
@@ -39,7 +38,7 @@ public class kinetic : MonoBehaviour
         circle[2].rotation = Quaternion.Euler(new Vector3(y * 180, 0f, 0f));
 
     }
-    void Arim(Transform[] arm, Transform target)
+    void RotateArim(Transform[] arm, Transform target)
     {
         float rotationstep = rotateSpeed * Time.deltaTime;
         current += rotationstep;
